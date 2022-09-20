@@ -1,14 +1,41 @@
-<div class="w-full">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
   <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+    <p class="py-3 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Boards</h1>
-    <%= link_to 'New board', new_board_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  <div class="flex justify-between items-center mt-4">
+    <h1 class="font-bold text-4xl my-4">Boards</h1>
   </div>
 
   <div id="boards" class="min-w-full">
-    <%= render @boards %>
+    <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <% @boards.each do |board| %>
+      <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
+        <div class="w-full flex items-center justify-between p-6 space-x-6">
+          <div class="flex-1 truncate">
+            <div class="flex items-center space-x-3">
+              <h3 class="text-gray-900 text-sm font-medium truncate"><%= board.name %></h3>
+            </div>
+            <p class="mt-1 text-gray-500 text-sm truncate">Regional Paradigm Technician</p>
+          </div>
+        </div>
+        <div>
+          <div class="-mt-px flex divide-x divide-gray-200">
+            <div class="w-0 flex-1 flex py-3">
+              <%= link_to edit_board_path(board) do %>
+                <span class="ml-3">Edit</span>
+              <% end %>
+            </div>
+            <div class="-ml-px w-0 flex-1 flex py-3">
+              <%= link_to board_path(board), data: { "turbo-method": :delete, "turbo-confirm": "Are you sure?"} do %>
+                <span class="ml-3 text-red-700">Delete</span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <% end %>
+    </ul>
   </div>
 </div>

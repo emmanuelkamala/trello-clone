@@ -48,3 +48,5 @@ group :test do
   gem "shoulda-matchers"
 end
 
+
+gem "pundit", "~> 2.2"

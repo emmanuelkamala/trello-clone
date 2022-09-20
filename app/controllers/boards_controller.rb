@@ -18,11 +18,12 @@ class BoardsController < ApplicationController
 
   # GET /boards/1/edit
   def edit
+    authorize set_board
   end
 
   # POST /boards
   def create
-    @board = Board.new(board_params)
+    @board = Board.new(board_params.merge(user: current_user))
 
     if @board.save
       redirect_to @board, notice: "Board was successfully created."
@@ -33,8 +34,9 @@ class BoardsController < ApplicationController
 
   # PATCH/PUT /boards/1
   def update
+    authorize set_board
     if @board.update(board_params)
-      redirect_to @board, notice: "Board was successfully updated."
+      redirect_to boards_path, notice: "Board was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -42,6 +44,7 @@ class BoardsController < ApplicationController
 
   # DELETE /boards/1
   def destroy
+    authorize set_board
     @board.destroy
     redirect_to boards_url, notice: "Board was successfully destroyed."
   end
@@ -54,6 +57,6 @@ class BoardsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def board_params
-      params.require(:board).permit(:name, :user_id)
+      params.require(:board).permit(:name)
     end
 end
