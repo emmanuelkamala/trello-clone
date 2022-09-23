@@ -1,4 +1,4 @@
-<div class="mx-auto md:w-2/3 w-full flex" data-controller="board">
+<div class="mx-auto md:w-2/3 max-w-7xl flex" data-controller="board">
   <div class="mx-auto">
     <% if notice.present? %>
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
@@ -12,5 +12,11 @@
     </div>
     <%= link_to 'Back to boards', boards_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
-  <div id="board"></div>
+</div>
+
+<div class="mx-auto max-w-full px-24 py-12" data-controller="board">
+  <div class="mx-auto max-w-full">
+    <p>Hello from Boards Controller</p>
+    <div id="board" style="overflow-x: scroll;"></div>
+  </div>
 </div>
