@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   resources :boards
   devise_for :users
   root 'home#index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+ 
+  namespace :api do 
+    resources :boards do 
+      resources :lists, only: :index, controller: "lists"
+    end
+  end
 end

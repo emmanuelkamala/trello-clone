@@ -12,6 +12,7 @@ gem "turbo-rails"
 gem "stimulus-rails"
 gem "tailwindcss-rails"
 #gem "jbuilder"
+gem "jsonapi-serializer"
 gem "redis", "~> 4.0"
 gem "devise"
 
